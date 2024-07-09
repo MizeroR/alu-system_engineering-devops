@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+#this bash script connects to an ssh portal using a key found at the specified file
+ssh -i ~/.ssh/school ubuntu@ubuntu
