@@ -16,20 +16,15 @@ touch /etc/nginx/html/404.html
 echo "Ceci n'est pas une page" > /etc/nginx/html/404.html
 
 printf %s "server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-    root   /etc/nginx/html;
-    index  index.html index.htm;
+     listen      80 default_server;
+     listen      [::]:80 default_server;
 
-    location /redirect_me {
-        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
-    }
+     rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4@cryptocoder permanent;
+     root        /var/www/html;
+     error_page 404/404.html;
 
-    error_page 404 /404.html;
-    location = /404.html {
-      root /etc/nginx/html;
-      internal;
-    }
+     index       index.html index.htm index.nginx-debian.html;
+
 }" > /etc/nginx/sites-available/default
 
 service nginx restart
