@@ -33,11 +33,9 @@ defaults
   timeout connect 10s
   timeout server 15s
   timeout http-request 10s
-
 frontend cryptocoder-tech-frontend
     bind *:80
     default_backend cryptocoder-tech-backend
-
 backend cryptocoder-tech-backend
     balance roundrobin
     server 6182-web-01 34.228.13.126:80 check
@@ -50,14 +48,8 @@ echo "$server_config" | sudo dd status=none of=/etc/haproxy/haproxy.cfg
 # enable haproxy to be started by init script
 echo "ENABLED=1" | sudo dd status=none of=/etc/default/haproxy
 
-echo "configured - Roundrobin On web-01 & web-02"
-
 if [ "$(pgrep -c haproxy)" -le 0 ]; then
 	sudo service haproxy start
 else
 	sudo service haproxy restart
 fi
-
-echo -e "web-01 web-02"
-echo "web-01"
-echo "web-02"
