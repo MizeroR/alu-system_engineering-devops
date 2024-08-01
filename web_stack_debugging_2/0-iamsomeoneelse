@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
-# Runs whoami command 
+# Runs whoami command
+
 sudo -u $1 whoami
